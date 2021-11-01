@@ -66,5 +66,13 @@ router.put("/edit", async (req, res, next) => {
     }
 });
 
-
+router.delete("/delete/:id", async (req, res) =>{
+    try {
+        const id = req.params.id;
+        await Pet.findByIdAndDelete(id);
+        return res.status(200).json("Pet deleted");
+    } catch (err) {
+        next(err);
+    }
+})
 module.exports = router;

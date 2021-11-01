@@ -13,10 +13,11 @@ const PORT = 4044;
 
 // RUTAS
 petRoutes = require("./routes/pet.routes");
+shelterRoutes = require("./routes/shelter.routes");
 
 // AGREGAR Routes
 server.use("/pets", petRoutes);
-
+server.use("/shelters", shelterRoutes);
 
 // Middleware para cuando no haya ruta
 server.use("*", (req, res, next) => {
