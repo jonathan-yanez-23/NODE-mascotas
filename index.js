@@ -6,6 +6,9 @@ const Pet = require("./models/Pet");
 const path = require("path");
 const hbs = require("hbs");
 const session = require("express-session");
+const passport = require("passport");
+require("./passport");
+
 // CONFIGURAR SERVER
 const server = express();
 server.use (express.json());
@@ -16,11 +19,17 @@ const PORT = 4044;
 // RUTAS
 petRoutes = require("./routes/pet.routes");
 shelterRoutes = require("./routes/shelter.routes");
+userRoutes = require("./routes/user.routes");
 indexRoutes = require("./routes/index.routes");
+
+
+// Inicializar passport
+server.use(passport.initialize())
 
 // AGREGAR Routes
 server.use("/pets", petRoutes);
 server.use("/shelters", shelterRoutes);
+server.use("/users", userRoutes);
 server.use("/", indexRoutes);
 
 

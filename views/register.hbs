@@ -8,12 +8,16 @@
 </head>
 <body>
     <h1>REGISTER</h1>
-    <form action="/users/register" method="post">
+    <form action="http://localhost:4044/users/register" method="post">
         <span>Email</span><br>
         <input type="text" name="email"><br>
         <span>Password</span><br>
         <input type="text" name="password"><br>
         <button type="submit">ENVIAR</button>
     </form>
+
+    {{#if error}}
+    <h3 style="color: red">{{error}}</h3>
+    {{/if}}
 </body>
 </html>

@@ -26,11 +26,11 @@ router.post('/login', (req, res, next) => {
             });
         }
 
-        req.logIn(user, (err) => {
+        req.login(user, (err) => {
             // Si hay un error logeando al usuario, resolvemos el controlador
             if (err) {
                 return res.render('login', {
-                    error: error.message
+                    error: err.message
                 });
             }
 

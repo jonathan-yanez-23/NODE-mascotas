@@ -1,7 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-
 const User = require('./models/User');
 
 // Creamos los salts de bcrypt
@@ -57,8 +56,11 @@ passport.use(
             passReqToCallback: true
         },
         async (req, email, password, done) =>{
+
             try {
                 // Primero buscamos si el usuario existe en nuestra DB
+                console.log("AQUI ESTA EL EMAIL");
+                
                 const currentUser = await User.findOne({email: email});
                 // Si NO existe el usuario, tendremos un error
                 if (!currentUser){
@@ -73,11 +75,17 @@ passport.use(
 
                 // Si el password es incorrecto, enviamos un erro a nuestro usuario
                 if(!isValidPassword) {
-                    const error = new Error("The email & password combination is incorrect!");
+                    const error = new Error(
+                        "The email & password combination is incorrect!"
+                    );
+                    return done(error);
                 }
-                return done(error);
+                
+                done(null, currentUser);
             } catch (err) {
                 // Si hay un error, resolvemos el callback con el error
+                console.log("AQUI ESTA EL ERROR");
+                console.log(err)
                 return done(err);
             }
         }
@@ -86,7 +94,7 @@ passport.use(
 
 // Funcion que usar el usuario de req.login para registrar su id en la cookie de sesion
 passport.serializeUser((user, done)=>{
-    return donde(null, user._id);
+    return done(null, user._id);
 });
 
 // Funcion que busca el usuario dada su _id en la DB y devolvera req.user si existe
