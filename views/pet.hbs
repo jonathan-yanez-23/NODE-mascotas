@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+</head>
+<body>
+    <h1>LA MASCOTA CON ID: {{this.id}}</h1>
+    {{#if this.pet}}
+        <h3>Name: {{this.pet.name}}</h3>
+        <h3>Age: {{this.pet.age}}</h3>
+        <h3>Species: {{this.pet.species}}</h3>
+    {{else}}
+    <h3>NO EXISTE LA MASCOTA QUE BUSCAS</h3>
+    {{/if}}
+</body>
+</html>

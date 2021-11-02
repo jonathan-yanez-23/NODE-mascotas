@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <h1>Todas las mascotas de UpgradePets</h1>
+    <ul>
+        {{#each pets}}
+        <li>
+            <h3>Name: {{uppercase this.name}}</h3>
+            <h3>Age: {{this.age}}</h3>
+            <h3>Species: {{this.species}}</h3>
+            {{#gte this.pet.name 5}}
+                <h3>Este perro tiene mas de cinco años</h3>
+            {{/gte}}
+        </li>
+        {{/each}}
+    </ul>
+</body>
+</html>
