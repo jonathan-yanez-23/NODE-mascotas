@@ -58,9 +58,7 @@ passport.use(
         async (req, email, password, done) =>{
 
             try {
-                // Primero buscamos si el usuario existe en nuestra DB
-                console.log("AQUI ESTA EL EMAIL");
-                
+                // Primero buscamos si el usuario existe en nuestra DB    
                 const currentUser = await User.findOne({email: email});
                 // Si NO existe el usuario, tendremos un error
                 if (!currentUser){
@@ -84,8 +82,6 @@ passport.use(
                 done(null, currentUser);
             } catch (err) {
                 // Si hay un error, resolvemos el callback con el error
-                console.log("AQUI ESTA EL ERROR");
-                console.log(err)
                 return done(err);
             }
         }
@@ -106,4 +102,10 @@ passport.deserializeUser(async (userId, done)=>{
         return done(err);
     }
 });
+
+
+
+
+
+
 module.exports = passport;

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+</head>
+<body>
+    <ul>
+        {{#each pets}}
+        <li>
+            <h3>Name: {{uppercase this.name}}</h3>
+            <h3>Age: {{this.age}}</h3>
+            <h3>Species: {{this.species}}</h3>
+            {{#gte this.age 5}}
+                Este perro tiene mas de cinco años
+                {{else}}
+                Este perro tiene MENOS de 5 años
+            {{/gte}}
+        </li>
+        {{/each}}
+    </ul>
+</body>
+</html>

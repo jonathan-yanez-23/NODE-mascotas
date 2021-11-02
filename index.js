@@ -2,11 +2,13 @@ require("./db");
 // Llamada al archivo de conexion de base de datos mongodb
 // Modulos que hacen falta
 const express = require("express");
-const Pet = require("./models/Pet");
 const path = require("path");
 const hbs = require("hbs");
-const session = require("express-session");
+
 const passport = require("passport");
+const mongoose = require("mongoose");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 require("./passport");
 
 // CONFIGURAR SERVER
@@ -23,8 +25,20 @@ userRoutes = require("./routes/user.routes");
 indexRoutes = require("./routes/index.routes");
 
 
-// Inicializar passport
+// Inicializar passport y la sesion
+server.use(
+    session({
+        secret: "upgradehub_node",
+        resave: false, // Solo guarda sesion si hay cambios en ella
+        saveUninitialized: false, // Se gestiona la sesion con passport
+        cookie: {
+            maxAge: 360000 // Milisegundos de duracion de la cookie (1Hora)
+        },
+        store: MongoStore.create({mongoUrl:"mongodb://localhost/upgrade_class_3"})
+    })
+);
 server.use(passport.initialize())
+server.use(passport.session()); // Middleware que agregara sesiones a los usuarios
 
 // AGREGAR Routes
 server.use("/pets", petRoutes);
