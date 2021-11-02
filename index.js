@@ -5,7 +5,7 @@ const express = require("express");
 const Pet = require("./models/Pet");
 const path = require("path");
 const hbs = require("hbs");
-
+const session = require("express-session");
 // CONFIGURAR SERVER
 const server = express();
 server.use (express.json());
@@ -44,6 +44,7 @@ server.use(express.static(path.join(__dirname, "public")));
 // Handlebars
 server.set("views", path.join(__dirname, "views"));
 server.set("view engine", "hbs");
+
 //Agregar el helper custom (if customizado)
 hbs.registerHelper("gte", (a, b, opts) => {
     if (a >= b){

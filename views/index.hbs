@@ -12,8 +12,10 @@
             <h3>Name: {{uppercase this.name}}</h3>
             <h3>Age: {{this.age}}</h3>
             <h3>Species: {{this.species}}</h3>
-            {{#gte this.pet.name 5}}
-                <h3>Este perro tiene mas de cinco años</h3>
+            {{#gte this.age 5}}
+                Este perro tiene mas de cinco años
+                {{else}}
+                Este perro tiene MENOS de 5 años
             {{/gte}}
         </li>
         {{/each}}
