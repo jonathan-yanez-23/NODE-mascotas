@@ -2,12 +2,14 @@ const express = require("express");
 const router = express.Router();
 const Pet = require("../models/Pet");
 
+
+
 router.get("/", async (req, res) => {
     try {
         const pets = await Pet.find();
-        return res.status(200).json(pets);
+        return res.status(200).render("pets", {title: "Upgrade pets", pets: pets})
     } catch (err) {
-        return res.status(500).json(err);
+        next(err)
     }
 });
 
