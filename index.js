@@ -9,6 +9,7 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const authMiddleware = require("./middlewares/auth.middleware"); // Middleware propio para autenticacion
 require("./passport");
 
 // CONFIGURAR SERVER
@@ -41,7 +42,7 @@ server.use(passport.initialize())
 server.use(passport.session()); // Middleware que agregara sesiones a los usuarios
 
 // AGREGAR Routes
-server.use("/pets", petRoutes);
+server.use("/pets",[authMiddleware.isAuthenticated], petRoutes);
 server.use("/shelters", shelterRoutes);
 server.use("/users", userRoutes);
 server.use("/", indexRoutes);

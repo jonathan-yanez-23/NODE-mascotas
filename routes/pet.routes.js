@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Pet = require("../models/Pet");
 
-
+const fileMiddlewares = require("../middlewares/file.middleware");
 
 router.get("/", async (req, res) => {
     try {
@@ -37,7 +37,9 @@ router.get("/species/:species", async (req, res) => {
     }
 });
 
-router.post("/create", async (req, res)=>{
+router.post("/create",
+[fileMiddlewares.upload.single("picture")],
+ async (req, res)=>{
     try {
         // CREAR instancia con los datos enviados
         const newPet = new Pet({
